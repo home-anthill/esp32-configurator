@@ -1,5 +1,6 @@
 .idea
-build
-node_modules
+.github
+esp32_configurator.egg-info
+venv
 .dockerignore
 Dockerfile

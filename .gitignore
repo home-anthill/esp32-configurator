@@ -1,6 +1,6 @@
 .idea/
 .DS_Store
 .vscode
-
+__pycache__
 venv/
 esp32_configurator.egg-info/

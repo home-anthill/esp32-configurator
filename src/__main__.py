@@ -6,7 +6,7 @@ import yaml
 from jinja2 import Environment, FileSystemLoader, select_autoescape, StrictUndefined
 from pydantic import parse_obj_as
 
-from configurator.models.secrets import Secrets
+from src.models.secrets import Secrets
 
 template_file_name = 'secrets.h'
 
