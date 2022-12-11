@@ -19,3 +19,6 @@
 // MQTT server
 #define MQTT_URL "{{ secrets.mqtt_domain }}"
 #define MQTT_PORT {{ secrets.mqtt_port }}
+#define MQTT_AUTH {{ 'true' if secrets.mqtt_auth else 'false' }}
+#define MQTT_USERNAME "{{ secrets.mqtt_username }}"
+#define MQTT_PASSWORD "{{ secrets.mqtt_password }}"
