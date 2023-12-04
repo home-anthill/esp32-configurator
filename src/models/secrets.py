@@ -15,7 +15,7 @@ class Secrets(BaseModel):
     server_path: str = '/api/register'
 
     mqtt_domain: str
-    mqtt_port: str = 8883
+    mqtt_port: int = 8883
     mqtt_auth: bool = True
     mqtt_username: str
     mqtt_password: str

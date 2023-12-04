@@ -4,7 +4,7 @@ from pathlib import Path
 
 import yaml
 from jinja2 import Environment, FileSystemLoader, select_autoescape, StrictUndefined
-from pydantic import parse_obj_as
+from pydantic import TypeAdapter
 
 from src.models.secrets import Secrets
 
@@ -56,7 +56,8 @@ def main() -> None:
 def parse_yaml_as_obj(path: Path) -> Secrets:
     with open(path, 'r') as stream:
         try:
-            return parse_obj_as(Secrets, yaml.safe_load(stream))
+            adapter = TypeAdapter(Secrets)
+            return adapter.validate_python(yaml.safe_load(stream))
         except yaml.YAMLError as err:
             print(err)
 
