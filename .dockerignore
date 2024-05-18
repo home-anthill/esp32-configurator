@@ -1,6 +1,0 @@
-.idea
-.github
-esp32_configurator.egg-info
-venv
-.dockerignore
-Dockerfile
