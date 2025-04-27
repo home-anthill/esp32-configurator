@@ -12,7 +12,7 @@ class Secrets(BaseModel):
 
     server_domain: str
     server_port: str = '443'
-    server_path: str = '/api/register'
+    server_path: str = '/admission/register'
 
     mqtt_domain: str
     mqtt_port: int = 8883
