@@ -11,8 +11,8 @@ from src.models.secrets import Secrets
 template_file_name = 'secrets.h'
 
 
-def read_template(source_file_path: str):
-    secrets_from_file: Secrets = parse_yaml_as_obj(path=Path(source_file_path))
+def read_template(source_file_path: str) -> Secrets | None:
+    secrets_from_file: Secrets | None = parse_yaml_as_obj(path=Path(source_file_path))
     print(f'{secrets_from_file}\n\n')
     return secrets_from_file
 
@@ -49,11 +49,12 @@ def main() -> None:
     print('source_arg: ' + source_arg)
     print('destination_arg: ' + destination_arg)
 
-    secrets: Secrets = read_template(source_file_path=source_arg)
-    write_template(secrets=secrets, model_name=model_arg, destination_path=destination_arg)
+    secrets: Secrets | None = read_template(source_file_path=source_arg)
+    if secrets is not None:
+      write_template(secrets=secrets, model_name=model_arg, destination_path=destination_arg)
 
 
-def parse_yaml_as_obj(path: Path) -> Secrets:
+def parse_yaml_as_obj(path: Path) -> Secrets | None:
     with open(path, 'r') as stream:
         try:
             adapter = TypeAdapter(Secrets)
