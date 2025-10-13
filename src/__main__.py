@@ -32,7 +32,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument('--model', help='unique model name', type=str)
     parser.add_argument('--source', help='path of the .yaml template with inputs', type=str)
-    parser.add_argument('--destination', help='path of the sensors or devices folder where to save the resulting .h file', type=str)
+    parser.add_argument('--destination', help='path of the firmwares folder where to save the resulting .h file', type=str)
     args = parser.parse_args()
 
     model_arg = args.model
