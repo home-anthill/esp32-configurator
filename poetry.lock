@@ -27,6 +27,7 @@ files = [
 [package.dependencies]
 idna = ">=2.8"
 sniffio = ">=1.1"
+typing_extensions = {version = ">=4.5", markers = "python_version < \"3.13\""}
 
 [package.extras]
 trio = ["trio (>=0.31.0)"]
@@ -1761,5 +1762,5 @@ cffi = ["cffi (>=1.17,<2.0) ; platform_python_implementation != \"PyPy\" and pyt
 
 [metadata]
 lock-version = "2.1"
-python-versions = "^3.14"
-content-hash = "e7e730c841a3567b58ae204be4da008a110fa32d568409d6c2252e8510f57f0b"
+python-versions = "^3.12"
+content-hash = "f94102e3b3cc9eeee24826c003e8a930120ea2b259506bc8cf47323b1def39d9"
