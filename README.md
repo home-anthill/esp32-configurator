@@ -21,6 +21,7 @@ GitHub releases [HERE](https://github.com/home-anthill/esp32-configurator/releas
 
 Versions:
 
+- ??/??/2026 - 2.2.0
 - 31/03/2026 - 2.1.0
 - 12/03/2026 - 2.0.1
 - 25/12/2025 - 2.0.0

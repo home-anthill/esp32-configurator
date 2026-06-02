@@ -22,3 +22,5 @@
 #define MQTT_AUTH {{ 'true' if secrets.mqtt_auth else 'false' }}
 #define MQTT_USERNAME "{{ secrets.mqtt_username }}"
 #define MQTT_PASSWORD "{{ secrets.mqtt_password.get_secret_value() }}"
+
+#define OLED_DISPLAY {{ 'true' if secrets.oled_display else 'false' }}

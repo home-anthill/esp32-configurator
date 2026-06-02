@@ -18,3 +18,5 @@ class Secrets(BaseModel):
     server_path: str = '/admission/register'
     mqtt_port: int = 8883
     mqtt_auth: bool = True
+
+    oled_display: bool = False

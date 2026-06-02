@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to AI agents when working with code in this repository.
 
 ## Project Overview
 
@@ -14,6 +14,9 @@ poetry install
 
 # Run the CLI
 python -m src --model <model_name> --source <yaml_path> --destination <output_path>
+
+# Run the installed console script
+esp32-configurator --model <model_name> --source <yaml_path> --destination <output_path>
 ```
 
 There are no test or lint commands configured.
@@ -25,10 +28,11 @@ The codebase is small and follows a straightforward pipeline: **YAML input → P
 - `src/__main__.py` — Entry point and all core logic: CLI argument parsing, YAML reading (`read_template`), Pydantic conversion (`parse_yaml`), Jinja2 environment setup (`get_jinja_env`), and file writing (`write_template`)
 - `src/models/secrets.py` — `Secrets` Pydantic BaseModel defining the configuration schema (WiFi, server, MQTT fields with defaults)
 - `templates/secrets.h` — Jinja2 template that produces the C header file
+- `pyproject.toml` — Poetry package metadata and the `esp32-configurator` console script entry point
 
 ## Tech Stack
 
-- Python 3.12+ with Poetry 2.3.2+
+- Python 3.12+ with Poetry
 - Pydantic for data validation, Jinja2 for templating, PyYAML for parsing
 - GitHub Actions CI (`.github/workflows/build.yml`)
 
