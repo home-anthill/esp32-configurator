@@ -19,4 +19,4 @@ class Secrets(BaseModel):
     mqtt_port: int = 8883
     mqtt_auth: bool = True
 
-    oled_display: bool = False
+    oled_display: bool = true

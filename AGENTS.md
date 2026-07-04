@@ -19,14 +19,16 @@ python -m src --model <model_name> --source <yaml_path> --destination <output_pa
 esp32-configurator --model <model_name> --source <yaml_path> --destination <output_path>
 ```
 
-There are no test or lint commands configured.
+Poetry is configured in `poetry.toml` to create an in-project `.venv` and use `/tmp/poetry_cache`.
+
+There are no test or lint commands configured in `pyproject.toml`.
 
 ## Architecture
 
 The codebase is small and follows a straightforward pipeline: **YAML input → Pydantic validation → Jinja2 rendering → C header output**.
 
 - `src/__main__.py` — Entry point and all core logic: CLI argument parsing, YAML reading (`read_template`), Pydantic conversion (`parse_yaml`), Jinja2 environment setup (`get_jinja_env`), and file writing (`write_template`)
-- `src/models/secrets.py` — `Secrets` Pydantic BaseModel defining the configuration schema (WiFi, server, MQTT fields with defaults)
+- `src/models/secrets.py` — `Secrets` Pydantic BaseModel defining the configuration schema (WiFi, server, MQTT, and display fields with defaults)
 - `templates/secrets.h` — Jinja2 template that produces the C header file
 - `pyproject.toml` — Poetry package metadata and the `esp32-configurator` console script entry point
 
@@ -45,3 +47,4 @@ The codebase is small and follows a straightforward pipeline: **YAML input → P
 - `pydantic.SecretStr` for sensitive fields (`wifi_password`, `api_token`, `mqtt_password`); call `.get_secret_value()` in templates
 - `Secrets.model_validate()` (not `TypeAdapter`) for idiomatic Pydantic v2 BaseModel validation
 - Required fields declared before optional fields in Pydantic models
+- Keep model fields and `templates/secrets.h` in sync; the template currently renders `oled_display` as `OLED_DISPLAY`
