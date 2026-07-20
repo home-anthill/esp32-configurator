@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "esp32-configurator"
-version = "2.1.0"
+version = "2.2.0"
 description = "ESP32 devices and sensors configurator"
 authors = ["Stefano Cappa"]
 readme = "README.md"
