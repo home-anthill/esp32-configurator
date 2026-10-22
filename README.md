@@ -8,6 +8,20 @@ esp32-configurator
 </h1>
 
 
+## Generate a firmware configuration
+
+```bash
+poetry install
+poetry run python -m src --model lux-temp-hum \
+  --source secrets-template.yaml --destination ../firmwares/lux-temp-hum
+```
+
+Edit a copy of `secrets-template.yaml` with your credentials and connection settings.
+The destination directory must exist. The command writes only `secrets.h`,
+replacing an existing file at that destination. `--model` is the device identity
+written to `MODEL`; all models use the same template.
+
+
 ## :open_book: Documentation :open_book:
 
 Take a look here [home-anthill/docs](https://github.com/home-anthill/docs)
@@ -21,7 +35,7 @@ GitHub releases [HERE](https://github.com/home-anthill/esp32-configurator/releas
 
 Versions:
 
-- ??/??/2026 - 2.2.0
+- ??/??/2026 - 3.0.0
 - 31/03/2026 - 2.1.0
 - 12/03/2026 - 2.0.1
 - 25/12/2025 - 2.0.0

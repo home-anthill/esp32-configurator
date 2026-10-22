@@ -17,9 +17,12 @@ def read_template(source_file_path: Path) -> Secrets:
     return secrets
 
 
-def write_template(secrets: Secrets, model_name: str, destination_path: Path) -> None:
+def write_template(secrets: Secrets, model_name: str,
+                   destination_path: Path) -> None:
     env = get_jinja_env()
-    rendered = env.get_template(TEMPLATE_FILE_NAME).render(secrets=secrets, model_name=model_name)
+    rendered = env.get_template(TEMPLATE_FILE_NAME).render(
+        secrets=secrets, model_name=model_name,
+    )
 
     output_file = destination_path / TEMPLATE_FILE_NAME
     print(f'Writing output to {output_file}')
@@ -47,7 +50,7 @@ def parse_yaml(path: Path) -> Secrets:
         sys.exit(1)
 
     try:
-        return Secrets.model_validate(data)
+        return Secrets.model_validate({} if data is None else data)
     except ValidationError as err:
         print(f'Validation error: {err}', file=sys.stderr)
         sys.exit(1)
