@@ -52,3 +52,18 @@ The codebase is small and follows a straightforward pipeline: **YAML input → P
 - Keep model fields and `templates/secrets.h` in sync.
 
 `--model` is device identity. All models use the same secrets template; there is no `--firmware` selection. Hardware settings belong in fixed firmware `config.h` files and must not be processed. The simulator requires no generated secrets. Legacy hardware YAML fields are ignored by Pydantic.
+
+## Supported device target
+
+Generated secrets are used by the ten networked ESP32-S3 Arduino firmwares. ESP32-S3 is the only supported board family; the tool does not select boards or configure GPIOs. Changing a profile API token also requires regenerating deployed firmware credentials and reflashing; backend rotation does not update device secrets automatically.
+
+## Shared device identity contract
+
+Keep identity rules aligned with admission, register, api-devices, and
+esp32-configurator, including their tests. MAC addresses must be six
+colon-separated hexadecimal octets and must be uppercased before processing,
+lookup, or persistence. Model must be 2–50 printable ASCII characters;
+manufacturer must be 3–50 printable ASCII characters (spaces and punctuation
+are allowed; control characters and non-ASCII text are rejected).
+The configurator validates YAML manufacturer and CLI model before writing headers;
+invalid input must return a nonzero exit code and preserve existing output.

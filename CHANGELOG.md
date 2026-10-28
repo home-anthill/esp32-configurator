@@ -2,11 +2,10 @@
 
 ## 3.0.0
 
-- Rename the motion firmware layout and YAML example from `airquality-motion` to `motion`.
 - Replace duplicated per-firmware YAML examples with one root `secrets-template.yaml`; remove the `examples/` directory.
-
 - Generate only shared credential/connection `secrets.h` for every model; remove firmware layout selection, hardware schemas, and simulator generation. Leave fixed `config.h` files untouched and ignore legacy hardware YAML fields. Update examples and regression coverage.
-
+- Validate model (2–50) and manufacturer (3–50 printable ASCII) before header generation; report invalid input and preserve existing output. Add schema and CLI regression tests.
+- Rename the motion firmware layout and YAML example from `airquality-motion` to `motion`.
 - Add `water-level` layout and YAML example with configurable input GPIO (default 17) and active-high polarity (default true), plus rendering, validation, and CLI tests.
 - Rename the layout/example to `airquality-airpressure` and remove the obsolete Grove air-quality GPIO from motion configuration.
 - Rename the barometer layout and example to `co2-airpressure` for the combined SCD43/BME688 firmware.

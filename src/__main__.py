@@ -7,6 +7,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 from pydantic import ValidationError
 
 from src.models.secrets import Secrets
+from src.models.device_identity import DeviceIdentity
 
 TEMPLATE_FILE_NAME = 'secrets.h'
 
@@ -19,9 +20,12 @@ def read_template(source_file_path: Path) -> Secrets:
 
 def write_template(secrets: Secrets, model_name: str,
                    destination_path: Path) -> None:
+    identity = DeviceIdentity.model_validate({
+        'model_name': model_name, 'manufacturer': secrets.manufacturer,
+    })
     env = get_jinja_env()
     rendered = env.get_template(TEMPLATE_FILE_NAME).render(
-        secrets=secrets, model_name=model_name,
+        secrets=secrets, model_name=identity.model_name,
     )
 
     output_file = destination_path / TEMPLATE_FILE_NAME
@@ -38,7 +42,10 @@ def main() -> None:
     args = parser.parse_args()
 
     secrets = read_template(source_file_path=args.source)
-    write_template(secrets=secrets, model_name=args.model, destination_path=args.destination)
+    try:
+        write_template(secrets=secrets, model_name=args.model, destination_path=args.destination)
+    except ValidationError as err:
+        parser.error(f'Invalid device identity: {err}')
 
 
 def parse_yaml(path: Path) -> Secrets:

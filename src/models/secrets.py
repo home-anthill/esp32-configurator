@@ -1,5 +1,7 @@
 from pydantic import BaseModel, SecretStr
 
+from src.models.device_identity import Manufacturer
+
 
 class Secrets(BaseModel):
     # Required fields
@@ -12,7 +14,7 @@ class Secrets(BaseModel):
     mqtt_password: SecretStr
 
     # Optional fields with defaults
-    manufacturer: str = 'ks89'
+    manufacturer: Manufacturer = 'ks89'
     ssl: bool = True
     server_port: int = 443
     server_path: str = '/admission/register'
