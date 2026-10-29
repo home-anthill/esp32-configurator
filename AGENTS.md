@@ -10,18 +10,29 @@ ESP32 Configurator is a Python CLI tool that generates C header files from YAML 
 
 ```bash
 # Install dependencies
-poetry install
+make deps
 
 # Run the CLI
-python -m src --model <model_name> --source <yaml_path> --destination <output_path>
+make run ARGS="--model <model_name> --source <yaml_path> --destination <output_path>"
 
-# Run the installed console script
-esp32-configurator --model <model_name> --source <yaml_path> --destination <output_path>
+# Check types with Pyrefly
+make lint
+
+# Audit dependencies
+make check
+
+# Run tests
+make test
+
+# Build packages
+make build
 ```
 
 Poetry is configured in `poetry.toml` to create an in-project `.venv` and use `/tmp/poetry_cache`.
 
-Run tests with `poetry run python -m unittest discover -s tests -v`, and verify packaging with `poetry build`. There is no configured linter.
+Use the Makefile commands above for local validation and GitHub Actions.
+`make` defaults to `make build`. Pyrefly checks Python types, including unannotated
+function bodies; there is no configured linter.
 
 ## Architecture
 

@@ -11,15 +11,28 @@ esp32-configurator
 ## Generate a firmware configuration
 
 ```bash
-poetry install
-poetry run python -m src --model lux-temp-hum \
-  --source secrets-template.yaml --destination ../firmwares/lux-temp-hum
+make deps
+make run ARGS="--model lux-temp-hum --source secrets-template.yaml --destination ../firmwares/lux-temp-hum"
 ```
 
 Edit a copy of `secrets-template.yaml` with your credentials and connection settings.
 The destination directory must exist. The command writes only `secrets.h`,
 replacing an existing file at that destination. `--model` is the device identity
 written to `MODEL`; all models use the same template.
+
+## Development
+
+Install Python 3.12+, Poetry, and Make, then run `make deps` to install runtime
+and development dependencies.
+
+```bash
+make lint # Check Python types with Pyrefly
+make check     # Audit dependencies with pip-audit
+make test      # Run the unittest suite
+make build     # Build the source distribution and wheel (also the default target)
+```
+
+GitHub Actions runs these same Make targets.
 
 
 ## :open_book: Documentation :open_book:

@@ -17,3 +17,4 @@
 - Validate GPIO values and require positive thermostat cooling rise-check durations.
 - Add firmware YAML examples and automated CLI/rendering regression tests in CI.
 - Include both Jinja2 header templates in built packages so the installed CLI can render configurations.
+- add Makefile
